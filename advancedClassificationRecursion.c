@@ -26,7 +26,7 @@ int sumOfPowOfDigits(int number, int length)
 /*will return if a number is palindrome-Recursion*/
 int isPalindrome(int n){
 	int length = lengthOfNumber(n);
-	return isPalindromeRecursive(n, length-2);
+	return isPalindromeRecursive(n, length);
 	
 }
 
