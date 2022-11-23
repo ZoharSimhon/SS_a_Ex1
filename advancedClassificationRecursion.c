@@ -43,7 +43,7 @@ int isPalindromeRecursive(int n, int length){
 	/*remuve the last digit of n*/
 	n /= 10;
 	length -= 2;
-	return (firstDigit == lastDigit) && isPalindrome(n, length);
+	return (firstDigit == lastDigit) && isPalindromeRecursive(n, length);
 }
 
 
