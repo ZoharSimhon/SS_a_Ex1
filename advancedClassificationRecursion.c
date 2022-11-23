@@ -7,7 +7,7 @@ int isArmstrong(int n)
 	int length = lengthOfNumber(n);
 	int sum = sumOfPowOfDigits(n, length);
 	if (sum == n){
-	return 1;
+		return 1;
 	}
 	return 0;
 }
@@ -33,7 +33,7 @@ int isPalindrome(int n){
 	int firstDigit = n/powOfTen;
 	int lastDigit = n%10;
 	/*remove the first digit of n*/
-	n %= 10;
+	n %= powOfTen;
 	/*remuve the last digit of n*/
 	n /= 10;
 	return (firstDigit == lastDigit) && isPalindrome(n);
