@@ -7,7 +7,7 @@ int isArmstrong(int n)
 {
 	int number=n, count=0, sum=0;
 	/*Check the length of number1*/
-	while(number!=0)
+	while(number> 0)
 	{
 		count++;
 		number /= 10;
