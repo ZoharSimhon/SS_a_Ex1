@@ -25,10 +25,16 @@ int sumOfPowOfDigits(int number, int length)
 
 /*will return if a number is palindrome-Recursion*/
 int isPalindrome(int n){
+	int length = lengthOfNumber(n);
+	return isPalindromeRecursive(n, length-2);
+	
+}
+
+/*will return if a number is palindrome-Recursion*/
+int isPalindromeRecursive(int n, int length){
 	if (n == 0){
 		return 1;
 	}
-	int length = lengthOfNumber(n);
 	int powOfTen = pow(10, length-1);
 	int firstDigit = n/powOfTen;
 	int lastDigit = n%10;
@@ -36,8 +42,9 @@ int isPalindrome(int n){
 	n %= powOfTen;
 	/*remuve the last digit of n*/
 	n /= 10;
-	return (firstDigit == lastDigit) && isPalindrome(n);
+	return (firstDigit == lastDigit) && isPalindrome(n, length-2);
 }
+
 
 
 
