@@ -1,7 +1,9 @@
 #dictionery
 CC = gcc -c
 FLAGS = -Wall -g
-AR = ar -rcs
+LIBAR = ar -rcs
+LIBSO = gcc -shared -o
+LIBMAIN = gcc -Wall
 
 
 all: mains maindloop maindrec libclassloops.a libclassrec.a libclassrec.so libclassloops.so
@@ -10,35 +12,38 @@ all: mains maindloop maindrec libclassloops.a libclassrec.a libclassrec.so libcl
 clean:
 	rm -rf *.o *.a *.so mains maindloop maindrec 
 
+
 loops: libclassloops.a
 
 libclassloops.a: basicClassification.o advancedClassificationLoop.o
-	$(AR) libclassloops.a basicClassification.o advancedClassificationLoop.o
+	$(LIBAR) libclassloops.a basicClassification.o advancedClassificationLoop.o
 
 recursives: libclassrec.a
 
 libclassrec.a: basicClassification.o advancedClassificationRecursion.o
-	$(AR) libclassrec.a basicClassification.o advancedClassificationRecursion.o
+	$(LIBAR) libclassrec.a basicClassification.o advancedClassificationRecursion.o
+
 
 recursived: libclassrec.so
 
 libclassrec.so : basicClassification.o advancedClassificationRecursion.o
-	gcc -shared -o libclassrec.so basicClassification.o advancedClassificationRecursion.o
+	$(LIBSO) libclassrec.so basicClassification.o advancedClassificationRecursion.o
 
 loopd: libclassloops.so
 
 libclassloops.so : basicClassification.o advancedClassificationLoop.o
-	gcc -shared -o libclassloops.so basicClassification.o advancedClassificationLoop.o
+	$(LIBSO) libclassloops.so basicClassification.o advancedClassificationLoop.o
 
 
 mains: main.o libclassrec.a
-	gcc -Wall main.o ./libclassrec.a -o mains -lm
+	$(LIBMAIN) main.o ./libclassrec.a -o mains -lm
+
 
 maindloop: main.o libclassloops.so
-	gcc -Wall main.o ./libclassloops.so -o maindloop -lm
+	$(LIBMAIN) main.o ./libclassloops.so -o maindloop -lm
 
 maindrec: main.o libclassrec.so
-	gcc -Wall main.o ./libclassrec.so -o maindrec -lm
+	$(LIBMAIN) main.o ./libclassrec.so -o maindrec -lm
 
 
 
